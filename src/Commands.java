@@ -2,12 +2,19 @@ import picocli.CommandLine;
 
 import java.util.ArrayList;
 
-@CommandLine.Command(subcommands = {Commands.ShowAllUsers.class, Commands.createUser.class})
+@CommandLine.Command(subcommands = {Commands.ShowAllUsers.class, Commands.createUser.class, Commands.addTask.class, Commands.showTasks.class})
 public class Commands implements Runnable {
     static String fileNameUser = "user.ser";
+
+    public static void main(String... args) {
+        int exitCode = new CommandLine(new Commands()).execute(args);
+        System.exit(exitCode);
+    }
+
     @Override
     public void run() {
     }
+
     @CommandLine.Command(name = "-showAllUsers")
     static class ShowAllUsers implements Runnable {
         @Override
@@ -42,6 +49,7 @@ public class Commands implements Runnable {
             }
         }
     }
+
     @CommandLine.Command(name = "-addTask")
     static class addTask implements Runnable {
         @CommandLine.Option(names = {"-un"}, required = true)
@@ -67,6 +75,7 @@ public class Commands implements Runnable {
             }
         }
     }
+
     @CommandLine.Command(name = "-showTasks")
     static class showTasks implements Runnable {
         @Override
@@ -75,9 +84,5 @@ public class Commands implements Runnable {
             for (Task u : t)
                 System.out.println(u.toString());
         }
-    }
-    public static void main(String... args) {
-        int exitCode = new CommandLine(new Commands()).execute(args);
-        System.exit(exitCode);
     }
 }

@@ -1,26 +1,17 @@
 import java.io.*;
 import java.util.ArrayList;
 
-public class Task {
-    public static String fileName = "task.ser";
+public class Task implements Serializable{
     private static final long serialVersionUID = 1L;
-    private  String userName;
-    private  String taskTitle;
-    private  String taskDescription;
+    public static String fileName = "task.ser";
+    private String userName;
+    private String taskTitle;
+    private String taskDescription;
 
     public Task(String userName, String taskTitle, String taskDescription) {
         this.userName = userName;
         this.taskTitle = taskTitle;
         this.taskDescription = taskDescription;
-    }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "userName='" + userName + '\'' +
-                ", taskTitle='" + taskTitle + '\'' +
-                ", taskDescription='" + taskDescription + '\'' +
-                '}';
     }
 
     static ArrayList<Task> readTasksFromFile(String fileName) {
@@ -42,11 +33,12 @@ public class Task {
         }
         return tasksInFile;
     }
-    static boolean addTasksinFile(String file, ArrayList<Task> users) {
+
+    static boolean addTasksinFile(String file, ArrayList<Task> tasks) {
         try {
             FileOutputStream outputStream = new FileOutputStream(file);
             ObjectOutputStream ois = new ObjectOutputStream(outputStream);
-            ois.writeObject(users);
+            ois.writeObject(tasks);
             outputStream.close();
             ois.close();
             return true;
@@ -54,5 +46,14 @@ public class Task {
             i.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "userName='" + userName + '\'' +
+                ", taskTitle='" + taskTitle + '\'' +
+                ", taskDescription='" + taskDescription + '\'' +
+                '}';
     }
 }

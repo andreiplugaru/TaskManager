@@ -1,29 +1,17 @@
-import picocli.CommandLine;
-
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class User implements Serializable {
-   public static String fileName = "user.ser";
     private static final long serialVersionUID = 1L;
-   private String FirstName;
-   private String LastName;
-   private  String userName;
+    public static String fileName = "user.ser";
+    private String FirstName;
+    private String LastName;
+    private String userName;
 
     public User(String firstName, String lastName, String userName) {
         FirstName = firstName;
         LastName = lastName;
         this.userName = userName;
-    }
-
-    @Override
-    public String toString() {
-        return "User {" +
-                "FirstName='" + FirstName + '\'' +
-                ", LastName='" + LastName + '\'' +
-                ", userName='" + userName + '\'' +
-                '}';
     }
 
     static ArrayList<User> readUsersFromFile(String fileName) {
@@ -45,6 +33,7 @@ public class User implements Serializable {
         }
         return usersInFile;
     }
+
     static boolean addUsersinFile(String file, ArrayList<User> users) {
         try {
             FileOutputStream outputStream = new FileOutputStream(file);
@@ -58,6 +47,16 @@ public class User implements Serializable {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return "User {" +
+                "FirstName='" + FirstName + '\'' +
+                ", LastName='" + LastName + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
+
     public String getFirstName() {
         return FirstName;
     }
@@ -71,5 +70,5 @@ public class User implements Serializable {
     }
 
 
-    }
+}
 
